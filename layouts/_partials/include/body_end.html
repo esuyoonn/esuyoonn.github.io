@@ -4,4 +4,41 @@ The code in this file will be inserted at the end of the <body> element on all p
 Suitable for: custom JavaScript
 */}}
 
-{{- /* Write your custom code here */}}
+{{- /* Scroll reveal animation */}}
+<script>
+(function () {
+    const io = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((e) => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    io.unobserve(e.target);
+                }
+            });
+        },
+        { threshold: 0.12 }
+    );
+
+    function attachReveal() {
+        /* sections, article cards, headings, paragraphs in content, list items */
+        const selectors = [
+            'section.layout',
+            'article',
+            '.cnt h2, .cnt h3',
+            '.cnt p',
+            '.cnt li',
+            'header.border-t',
+        ];
+        document.querySelectorAll(selectors.join(',')).forEach((el) => {
+            el.classList.add('reveal');
+            io.observe(el);
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', attachReveal);
+    } else {
+        attachReveal();
+    }
+})();
+</script>
