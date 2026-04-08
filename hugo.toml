@@ -2,7 +2,8 @@ baseURL = "https://esuyoonn.github.io/"
 title = "Dongyoung Yoon"
 languageCode = "en"
 defaultContentLanguage = "en"
-paginate = 10
+[pagination]
+  pagerSize = 10
 
 [module]
   [module.hugoVersion]
